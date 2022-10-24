@@ -3,7 +3,7 @@ package s1.l_system
 import scala.swing.*
 import scala.swing.Swing.*
 import java.awt.Color
-
+import scala.swing.event._
 
 class LSystemWindow() extends MainFrame:
   title = "L-system"
@@ -23,6 +23,8 @@ class LSystemWindow() extends MainFrame:
 
       LSystem.drawFractal(g, 6)
     end paintComponent
+
+    this.listenTo(mouse.moves)
 
     this.reactions += {
       case event.MouseMoved(_, point: java.awt.Point, _) =>

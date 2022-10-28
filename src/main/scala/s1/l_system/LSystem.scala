@@ -14,10 +14,12 @@ object LSystem:
     case 'A' => "B[A]A"
     case 'B' => "BB"
     case 'F' => "F+F-F-F+F"
+    case 'S' => "S+P"
+    case 'P' => "S-P"
     case other => other.toString
   }
 
-  val STARTER = "A"
+  val STARTER = "S"
   val lStrings = LazyList.iterate(STARTER)(_.flatMap(rules))
 
   def drawFractal(g: Graphics2D, depth: Int) =
@@ -72,6 +74,19 @@ object LSystem:
           base = base.rotate(-math.Pi / 2)
         case '-' =>
           base = base.rotate(math.Pi / 2)
+
+        case 'S' =>
+          g.setColor(Color.GREEN)
+          g.setStroke(strokes(1))
+          val newPosition = position + base
+          g.drawLine(position.x.toInt, position.y.toInt, newPosition.x.toInt, newPosition.y.toInt)
+          position = newPosition
+        case 'P' =>
+          g.setColor(Color.GREEN)
+          g.setStroke(strokes(1))
+          val newPosition = position + base
+          g.drawLine(position.x.toInt, position.y.toInt, newPosition.x.toInt, newPosition.y.toInt)
+          position = newPosition
   end drawFractal
 
 
@@ -128,6 +143,19 @@ object LSystem:
           base = base.rotate(-math.Pi / 2)
         case '-' =>
           base = base.rotate(math.Pi / 2)
+
+        case 'S' =>
+          g.setColor(Color.GREEN)
+          g.setStroke(strokes(1))
+          val newPosition = position + base
+          g.drawLine(position.x.toInt, position.y.toInt, newPosition.x.toInt, newPosition.y.toInt)
+          position = newPosition
+        case 'P' =>
+          g.setColor(Color.GREEN)
+          g.setStroke(strokes(1))
+          val newPosition = position + base
+          g.drawLine(position.x.toInt, position.y.toInt, newPosition.x.toInt, newPosition.y.toInt)
+          position = newPosition
     end for
 
     if latestIteration.length - 1 == chars then true else false

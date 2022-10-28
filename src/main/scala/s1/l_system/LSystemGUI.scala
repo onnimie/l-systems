@@ -21,7 +21,7 @@ class LSystemWindow() extends MainFrame:
       // g.setColor(Color.GREEN)
       // g.drawLine(300, 550, 300, 100)
 
-      iterationEnding = LSystem.drawFractalPieceByPiece(g, 6, charactersToDrawFromLatestIteration)
+      iterationEnding = LSystem.drawFractalPieceByPiece(g, 10, charactersToDrawFromLatestIteration)
     end paintComponent
 
     this.listenTo(mouse.moves)

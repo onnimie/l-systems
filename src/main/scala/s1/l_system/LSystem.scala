@@ -16,10 +16,11 @@ object LSystem:
     case 'F' => "F+F-F-F+F"
     case 'S' => "S+P"
     case 'P' => "S-P"
+    case 'X' => "B<((X)>X)>B(>BX)<X"
     case other => other.toString
   }
-
-  val STARTER = "S"
+  // tree: A, Koch: F, Dragon: S, Fern: X
+  val STARTER = "X"
   val lStrings = LazyList.iterate(STARTER)(_.flatMap(rules))
 
   def drawFractal(g: Graphics2D, depth: Int) =
@@ -91,6 +92,14 @@ object LSystem:
           width    = state.width - 1
           g.setStroke(strokes(width))
 
+        case '(' =>
+          states.push(State(position, base, width))
+
+        case ')' =>
+          val state: State = states.pop()
+          base     = state.base
+          position = state.pos
+
         case 'F' =>
           g.setColor(Color.RED)
           g.setStroke(strokes(1))
@@ -114,6 +123,15 @@ object LSystem:
           val newPosition = position + base
           g.drawLine(position.x.toInt, position.y.toInt, newPosition.x.toInt, newPosition.y.toInt)
           position = newPosition
+
+        case '<' =>
+          base = base.rotate((-5 * math.Pi) / 36)
+        case '>' =>
+          base = base.rotate((5 * math.Pi) / 36)
+        case 'X' =>
+          g.setColor(Color.MAGENTA)
+          g.setStroke(strokes(2))
+
     end for
   end drawPiecesWithRulesFromString
 

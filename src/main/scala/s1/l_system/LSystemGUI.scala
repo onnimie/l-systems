@@ -21,7 +21,7 @@ class LSystemWindow() extends MainFrame:
       // g.setColor(Color.GREEN)
       // g.drawLine(300, 550, 300, 100)
 
-      LSystem.drawFractal(g, 6)
+      iterationEnding = LSystem.drawFractalPieceByPiece(g, 6, charactersToDrawFromLatestIteration)
     end paintComponent
 
     this.listenTo(mouse.moves)
@@ -31,6 +31,23 @@ class LSystemWindow() extends MainFrame:
         mouseX = point.x
         mouseY = point.y
     }
+
+
+  var iterationEnding = false
+  var charactersToDrawFromLatestIteration = 1
+
+  val listener = ActionListener( (e: java.awt.event.ActionEvent) => {
+    // timer stuff here
+    repaint()
+    charactersToDrawFromLatestIteration += 1
+    if iterationEnding then
+      iterationEnding = false
+      charactersToDrawFromLatestIteration = 1
+
+  })
+
+  val timer = javax.swing.Timer(10, listener)
+  timer.start()
 
   centerOnScreen()
 

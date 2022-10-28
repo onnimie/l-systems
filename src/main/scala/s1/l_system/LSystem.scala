@@ -20,7 +20,7 @@ object LSystem:
     case other => other.toString
   }
   // tree: A, Koch: F, Dragon: S, Fern: X
-  val STARTER = "X"
+  val STARTER = "S"
   val lStrings = LazyList.iterate(STARTER)(_.flatMap(rules))
 
   def drawFractal(g: Graphics2D, depth: Int) =
@@ -112,14 +112,14 @@ object LSystem:
           base = base.rotate(math.Pi / 2)
 
         case 'S' =>
-          g.setColor(Color.GREEN)
-          g.setStroke(strokes(1))
+          g.setColor(Color.CYAN)
+          g.setStroke(strokes(3))
           val newPosition = position + base
           g.drawLine(position.x.toInt, position.y.toInt, newPosition.x.toInt, newPosition.y.toInt)
           position = newPosition
         case 'P' =>
-          g.setColor(Color.GREEN)
-          g.setStroke(strokes(1))
+          g.setColor(Color.BLUE)
+          g.setStroke(strokes(3))
           val newPosition = position + base
           g.drawLine(position.x.toInt, position.y.toInt, newPosition.x.toInt, newPosition.y.toInt)
           position = newPosition

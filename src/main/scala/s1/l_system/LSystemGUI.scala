@@ -9,7 +9,7 @@ class LSystemWindow() extends MainFrame:
   title = "L-system"
   contents = new Panel:
     background    = Color.white
-    preferredSize = (600, 600)
+    preferredSize = (1200, 800)
 
     // can be fun to play with inside PaintComponent - especially as extra input to drawFractal
     var mouseX = 0

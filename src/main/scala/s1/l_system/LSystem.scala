@@ -24,12 +24,6 @@ object LSystem:
   val lStrings = LazyList.iterate(STARTER)(_.flatMap(rules))
 
   def drawFractal(g: Graphics2D, depth: Int) =
-    val strokes    = Buffer.tabulate(depth + 1)(BasicStroke(_))
-    val states     = collection.mutable.Stack[State]()
-    var position   = Vector2D(300, 550)
-    var base       = Vector2D(0, -8)
-    var width      = depth
-    val LeafRadius = 6
 
     val tree = LSystem.lStrings(depth)
 
@@ -56,10 +50,10 @@ object LSystem:
   def drawPiecesWithRulesFromString(s: String, depth: Int, g: Graphics2D) =
 
     val states     = collection.mutable.Stack[State]()
-    var position   = Vector2D(300, 550)
+    var position   = Vector2D(300, 250) //300, 550 original
     val strokes = Buffer.tabulate(depth + 1)(BasicStroke(_))
     var width = depth
-    var base = Vector2D(0, -8)
+    var base = Vector2D(0, -20).rotate(-math.Pi/1800 * s.length).scale(math.max(0.01, 1 - (s.length/(2000.0))))
     val LeafRadius = 6
 
     g.setColor(Color.GRAY)

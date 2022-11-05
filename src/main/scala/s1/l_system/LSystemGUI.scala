@@ -18,8 +18,9 @@ class LSystemWindow() extends MainFrame:
     override def paintComponent(g: Graphics2D): Unit =
       super.paintComponent(g)
 
-      // g.setColor(Color.GREEN)
-      // g.drawLine(300, 550, 300, 100)
+      g.setColor(Color.darkGray)
+      g.fillRect(0, 0, 1200, 800)
+
 
       iterationEnding = LSystem.drawFractalPieceByPiece(g, 20, charactersToDrawFromLatestIteration)
       //LSystem.drawFractal(g, 20)
